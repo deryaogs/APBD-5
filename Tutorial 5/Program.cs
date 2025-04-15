@@ -32,46 +32,41 @@ public class DevicesController : ControllerBase
         _deviceService = deviceService;
     }
 
-    // GET: api/Devices
     [HttpGet]
-    public IActionResult GetAll()
+    public IResult GetAll()
     {
         var devices = _deviceService.GetAllDevices()
             .Select(d => new { d.Id, d.Name, d.IsEnabled, d.OperatingSystem });
-        return Ok(devices);
+        return Results.Ok(devices); 
     }
 
-    // GET: api/Devices/{id}
     [HttpGet("{id}")]
-    public IActionResult GetById(string id)
+    public IResult GetById(string id)
     {
         var device = _deviceService.GetDeviceById(id);
-        return device is not null ? Ok(device) : NotFound();
+        return device is not null ? Results.Ok(device) : Results.NotFound();
     }
 
-    // POST: api/Devices
     [HttpPost]
-    public IActionResult Create([FromBody] Device device)
+    public IResult Create([FromBody] Device device)
     {
         var created = _deviceService.AddDevice(device);
-        return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
+        return Results.Created($"/api/devices/{created.Id}", created); 
     }
 
-    // PUT: api/Devices/{id}
     [HttpPut("{id}")]
-    public IActionResult Update(string id, [FromBody] Device device)
+    public IResult Update(string id, [FromBody] Device device)
     {
-        device.Id = id;  // Ensure the device's Id stays consistent
+        device.Id = id; 
         var updatedDevice = _deviceService.EditDevice(device);
-        return updatedDevice is not null ? Ok(updatedDevice) : NotFound();
+        return updatedDevice is not null ? Results.Ok(updatedDevice) : Results.NotFound();
     }
 
-    // DELETE: api/Devices/{id}
     [HttpDelete("{id}")]
-    public IActionResult Delete(string id)
+    public IResult Delete(string id)
     {
         var removedDevice = _deviceService.RemoveDeviceById(id);
-        return removedDevice is not null ? Ok() : NotFound();
+        return removedDevice is not null ? Results.Ok() : Results.NotFound();
     }
 }
 
