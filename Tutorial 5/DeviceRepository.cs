@@ -15,8 +15,11 @@ public class DeviceRepository
 
     public Device? GetById(string id) => _devices.FirstOrDefault(d => d.Id == id);
 
-    public Device Add(Device device)
+    public Device Add(Device device, int max)
     {
+        if(_devices.Count() >= max) {
+            throw new Exception();
+        }
         if (_devices.Any(d => d.Id == device.Id))
         {
             throw new InvalidOperationException("Device already exists.");
