@@ -12,7 +12,7 @@ public class DeviceManager
 
     public Device? GetDeviceById(string id) => _deviceRepository.GetById(id);
 
-    public Device AddDevice(Device newDevicen, int maxCount) => _deviceRepository.Add(newDevice);
+    public Device AddDevice(Device newDevice) => _deviceRepository.Add(newDevice, maxCount);
 
     public Device? EditDevice(Device updatedDevice) => _deviceRepository.Update(updatedDevice);
 
