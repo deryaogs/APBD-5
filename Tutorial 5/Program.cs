@@ -81,6 +81,16 @@ public abstract class Device
     public string OperatingSystem { get; set; }
 }
 
+public class PCDevice : Device
+{
+    public PCDevice(string id, string name, bool isEnabled, string operatingSystem)
+    {
+        Id = id;
+        Name = name;
+        IsEnabled = isEnabled;
+        OperatingSystem = operatingSystem;
+    }
+}
 
 public class DeviceRepository
 {
@@ -90,8 +100,8 @@ public class DeviceRepository
     {
         _devices = new List<Device>
         {
-            new Device { Id = "P-1", Name = "PC 1", IsEnabled = true, OperatingSystem = "Windows 10" },
-            new Device { Id = "P-2", Name = "PC 2", IsEnabled = true, OperatingSystem = "Ubuntu" }
+            new PCDevice("P-1", "PC 1", true, "Windows 10"),
+            new PCDevice("P-2", "PC 2", true, "Ubuntu")
         };
     }
 
