@@ -1,3 +1,8 @@
+static void Main()
+{
+    
+}
+
 public class DeviceRepository
 {
     private readonly List<Device> _devices;

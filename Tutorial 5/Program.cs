@@ -1,5 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
+
+
+static void Main() {
+
+}
 var builder = WebApplication.CreateBuilder(args);
+
 
 builder.Services.AddSingleton<DeviceRepository>();
 builder.Services.AddSingleton<DeviceManager>();
@@ -69,5 +75,4 @@ public class DevicesController : ControllerBase
         return removedDevice is not null ? Results.Ok() : Results.NotFound();
     }
 }
-
 
